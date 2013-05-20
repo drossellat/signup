@@ -63,7 +63,7 @@
             $('#signup').submit(function() {
                 $("#message").html("<span class='error'>Adding your email address...</span>");
                 $.ajax({
-                    url: 'inc/store-address.php', // proper url to your "store-address.php" file
+                    url: '/wp-content/custom_code/store-address.php', // proper url to your "store-address.php" file
                     data: 'ajax=true&email=' + emailEntered +'&fname=' + fnameVal + '&lname=' + lnameVal + '&ePACTTrial=' + ePACTTrial + '&organization=' + organization,
                     success: function(msg) {
                         $('#message').html(msg);
