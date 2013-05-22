@@ -22,7 +22,9 @@
                             <br />
             email Address (required):&nbsp; <input type="email" name="email" id="email" class="textinput" value="" />
                             <br />
-            <input type="checkbox" name="trial" checked="checked">Interested in joining the ePACT trial? <input type="submit" id="SendButton" name="SendButton" class="textinput" value="Submit" />
+            <input type="checkbox" name="useFamily" checked="checked">Please alert me when ePACT is available for my family to use</input>
+            <input type="checkbox" name="useOrganization" checked="checked">Please alert me when ePACT is available for my organization to use</input>           
+             <input type="submit" id="SendButton" name="SendButton" class="textinput" value="Submit" />
             </form>
         </div>
         <div id="message">
@@ -33,8 +35,9 @@
         var emailEntered,
             fnameVal,
             lnameVal,
-            ePACTTrial,
-            organization;
+            useFamilyVal,
+            useOrganizationVal,
+            organizationVal;
 
         $(document).ready(function() {
             $("#SendButton").click(function() {
@@ -54,17 +57,18 @@
                         emailEntered = escape($('#email').val());
                     }
 
-                    fnameVal        = escape($("#fname").val());
-                    lnameVal        = escape($("#lname").val());
-                    ePACTTrial    	= $('input:checkbox[name=trial]:checked').val();
-                    organization 	= escape($("#organization").val());
+                    fnameVal        		= escape($("#fname").val());
+                    lnameVal    	    	= escape($("#lname").val());
+                    useFamilyVal    		= $('input:checkbox[name=useFamily]:checked').val();
+                    useOrganizationVal   	= $('input:checkbox[name=useOrganization]:checked').val();
+                    organizationVal 		= escape($("#organization").val());
 
             });
             $('#signup').submit(function() {
                 $("#message").html("<span class='error'>Adding your email address...</span>");
                 $.ajax({
                     url: '/wp-content/custom_code/store-address.php', // proper url to your "store-address.php" file
-                    data: 'ajax=true&email=' + emailEntered +'&fname=' + fnameVal + '&lname=' + lnameVal + '&ePACTTrial=' + ePACTTrial + '&organization=' + organization,
+                    data: 'ajax=true&email=' + emailEntered +'&fname=' + fnameVal + '&lname=' + lnameVal + '&useFamily=' + useFamilyVal + '&useOrganization=' + useOrganizationVal + '&organization=' + organizationVal,
                     success: function(msg) {
                         $('#message').html(msg);
                     }
